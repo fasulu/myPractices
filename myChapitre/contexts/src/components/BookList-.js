@@ -10,7 +10,6 @@ function BookList() {
 
         <div className="book-list" style={{ color: theme.text, background: theme.bg }}>
             <ul>
-
                 <li style={{ background: theme.ui }}>The way of Kings</li>
                 <li style={{ background: theme.ui }}>The name of the wind</li>
                 <li style={{ background: theme.ui }}>The final empire</li>
@@ -20,7 +19,7 @@ function BookList() {
 }
 export default BookList;
 
-// the following is the replacement of function component into class component
+// the following changed from functionnal component to class component
 
 // class BookList extends Component {
 
