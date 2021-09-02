@@ -3,16 +3,19 @@ const cors = require('cors')
 const mongoose = require("mongoose");
 const app = express()
 
-const { uniqueNamesGenerator, names, adjectives, colors, countries } = require("unique-names-generator");
+const { uniqueNamesGenerator, names, languages, colors, countries } = require("unique-names-generator");
 
 const persons = [];
-for (let i = 0; i < 49; i++) {
+
+var temp;
+
+for (let i = 0; i < 9; i++) {
 
     persons.push({
         firstname: uniqueNamesGenerator({ dictionaries: [names] }),
         surname: uniqueNamesGenerator({ dictionaries: [names] }),   
-        address: uniqueNamesGenerator({ dictionaries: [adjectives] }),   
-        road: uniqueNamesGenerator({ dictionaries: [colors] }),   
+        address: uniqueNamesGenerator({ dictionaries: [languages] }),
+        road: uniqueNamesGenerator({ dictionaries: [colors] }) + " Road",   
         countries: uniqueNamesGenerator({ dictionaries: [countries] }),
     });
 }
@@ -35,7 +38,7 @@ const personSchema = new mongoose.Schema({
 
 const Person = mongoose.model("Person", personSchema)
 
-const port = 9000
+const port = 9002
 app.use(express.json())
 app.use(cors())
 
@@ -81,9 +84,10 @@ const deletedAllThenAdd = async () => {
 
         console.log(result.length ? "There are repeated address!!" : "No repeated address")
 
-        await mongoose.disconnect()
+        // await mongoose.disconnect()
 
-        console.log("disconnected ok")
+        // console.log("disconnected ok")
+
     } catch (error) {
         console.log(error)
     }
@@ -92,7 +96,7 @@ const deletedAllThenAdd = async () => {
 
 // deletedAllThenAdd();
 
-const addressList = (async (req, res) => {
+const addressList = (async (req, res) => { 
     
     try {
         console.log("Im in addresList", req.body)
